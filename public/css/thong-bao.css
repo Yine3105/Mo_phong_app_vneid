@@ -1,0 +1,57 @@
+/* Module thông báo */
+/* Đầu trang thông báo kiểu VNeID (tiêu đề + hình chuông) */
+.dau-thong-bao { position:relative; background:#f3ede8; padding:34px 20px 0; min-height:100px; overflow:hidden; }
+.dau-thong-bao-tieu-de { margin:0; font-size:22px; font-weight:700; color:var(--mau-chu); position:relative; z-index:1; }
+.dau-thong-bao-hinh { position:absolute; right:0; top:0; height:100%; width:auto; max-width:55%; object-fit:cover; object-position:right top; pointer-events:none; }
+
+/* Tab gạch chân (nền be liền với phần đầu trang) */
+.tab-thong-bao { display:flex; gap:24px; padding:0 20px; border-bottom:1px solid #eee; overflow-x:auto; background:#f3ede8; }
+.tab-thong-bao a { position:relative; padding:14px 0; white-space:nowrap; color:var(--mau-phu); text-decoration:none; font-size:15px; font-weight:600; }
+.tab-thong-bao a.dang-chon { color:var(--mau-chu); }
+.tab-thong-bao a.dang-chon::after { content:''; position:absolute; left:0; right:0; bottom:-1px; height:3px; border-radius:3px 3px 0 0; background:var(--mau-chinh); }
+
+/* Thanh công cụ */
+.thanh-cong-cu { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; padding:14px 20px 4px; }
+.nhom-nut-phai { display:flex; align-items:center; gap:16px; }
+.lien-ket-loc { color:var(--mau-phu); text-decoration:none; font-size:14px; }
+.nut-chu-do { background:none; border:0; padding:0; color:var(--mau-chinh); font-size:14px; font-weight:700; cursor:pointer; }
+
+/* Tiêu đề nhóm ngày */
+.nhom-ngay { padding:18px 20px 8px; font-size:15px; font-weight:700; color:#6b6b6b; }
+
+/* Thẻ thông báo */
+.the-thong-bao { position:relative; margin:0 16px 12px; padding:16px 36px 12px 16px; border-radius:12px; background:#f3f3f1; }
+.the-thong-bao.chua-doc { background:#fbf5ea; }
+.cham-do { position:absolute; top:20px; right:16px; width:8px; height:8px; border-radius:50%; background:var(--mau-chinh); }
+
+.tieu-de-the { display:block; color:var(--mau-chu); font-size:16px; font-weight:700; line-height:1.35; text-decoration:none; }
+.the-thong-bao:not(.chua-doc) .tieu-de-the { font-weight:600; color:#555; }
+/* Cả thẻ bấm được để mở chi tiết */
+.tieu-de-the::after { content:''; position:absolute; inset:0; border-radius:12px; }
+
+.noi-dung-the { margin:6px 0 10px; color:#444; font-size:14px; line-height:1.5; }
+
+.chan-the { display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-size:13px; color:#888; }
+.gio { display:inline-flex; align-items:center; gap:5px; }
+.nhan-loai { padding:2px 8px; border-radius:10px; background:rgba(0,0,0,.06); font-size:12px; }
+
+/* Nút nhỏ nằm trên lớp bấm của thẻ */
+.hanh-dong-nho { position:relative; z-index:1; display:flex; gap:14px; margin-left:auto; }
+.hanh-dong-nho form { margin:0; }
+.hanh-dong-nho button { background:none; border:0; padding:0; color:var(--mau-chinh); font-size:13px; cursor:pointer; }
+
+.rong-thong-bao { padding:40px 20px; text-align:center; color:#777; }
+.phan-trang { display:flex; justify-content:center; align-items:center; gap:16px; padding:16px; font-size:14px; }
+.phan-trang a { color:var(--mau-chinh); text-decoration:none; }
+
+/* Trang chi tiết (giữ nguyên) */
+.noi-dung-thong-bao { line-height:1.6; margin:12px 0 20px; }
+
+/* Ẩn thanh cuộn nhưng vẫn cuộn được, giống app thật */
+* {
+    scrollbar-width: none;        /* Firefox */
+    -ms-overflow-style: none;     /* Edge/IE cũ */
+}
+*::-webkit-scrollbar {
+    display: none;                /* Chrome, Edge, Safari */
+}

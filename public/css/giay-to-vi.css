@@ -1,0 +1,118 @@
+/* Module ví giấy tờ */
+.vung-the { background:var(--mau-nen); padding-bottom:1px; }
+.vung-the .vn-the { width:auto; margin:16px; }
+.the-can-cuoc { margin:16px; border-radius:14px; padding:16px; display:flex; gap:12px; background:linear-gradient(135deg,#e4f3f0,#f7f1cf 55%,#dcecf5); box-shadow:0 1px 4px rgba(0,0,0,.15); }
+.the-can-cuoc img, .the-can-cuoc .anh-trong { width:96px; height:128px; object-fit:cover; background:#c9c9c9; flex-shrink:0; }
+.the-can-cuoc-chu { font-size:12px; line-height:1.5; min-width:0; }
+.the-can-cuoc-chu .tieu-quoc-hieu { color:#1b3a8a; font-weight:bold; font-size:10px; text-align:center; }
+.the-can-cuoc-chu .ten-the { color:#c0262d; font-weight:bold; font-size:15px; margin:4px 0; text-align:center; }
+.the-can-cuoc-chu strong { display:block; font-size:15px; margin-bottom:2px; }
+.nut-xem-chi-tiet { display:block; width:max-content; margin:0 auto 16px; padding:10px 28px; background:#fff; border-radius:24px; color:var(--mau-chu); text-decoration:none; box-shadow:0 1px 3px rgba(0,0,0,.15); }
+.muc-tai-khoan { padding:16px 20px; color:var(--mau-chinh); font-weight:bold; border-bottom:1px solid #eee; }
+.canh-bao-cho { margin:14px 20px 0; color:var(--mau-chinh); font-weight:bold; font-size:14px; }
+.luoi-giay-to { display:grid; grid-template-columns:repeat(3,1fr); gap:16px 8px; padding:16px 12px; }
+.o-giay-to { text-align:center; text-decoration:none; color:var(--mau-chu); font-size:14px; }
+.o-giay-to .bieu-tuong { width:64px; height:64px; margin:0 auto 6px; border-radius:50%; background:#f6ece8; display:flex; align-items:center; justify-content:center; font-size:28px; }
+.o-giay-to .nhan-trang-thai { margin-top:4px; }
+.o-them-moi .bieu-tuong { background:#fff; border:2px dashed var(--mau-chinh); color:var(--mau-chinh); }
+
+/* Hộp nhập mật khẩu xác nhận */
+.otp-container { background:#fff; border-radius:14px; overflow:hidden; margin:20px 0; }
+.otp-tieu-de { padding:18px 16px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #eee; font-size:16px; }
+.otp-dong { color:#555; font-size:28px; text-decoration:none; line-height:1; }
+.otp-thong-bao { text-align:center; padding:16px 10px; color:#555; font-size:14px; }
+.otp-xac-nhan { width:calc(100% - 24px); margin:12px; padding:14px; border:none; border-radius:8px; background:#dc1822; color:#fff; font-size:16px; font-weight:bold; cursor:pointer; }
+.otp-xac-nhan:disabled { background:#aaa; cursor:not-allowed; }
+
+/* Ô nhập mật khẩu */
+.mk-khoi { padding:24px 16px 8px; }
+.mk-o-nhap { width:100%; box-sizing:border-box; padding:14px; font-size:16px; border:1px solid #ddd; border-radius:8px; outline:none; }
+.mk-o-nhap:focus { border-color:#dc1822; }
+
+/* Popup nhập mật khẩu */
+.otp-nen-mo { position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:1000; display:flex; align-items:flex-end; justify-content:center; }
+.otp-nen-mo[hidden] { display:none; }
+.otp-hop { width:100%; max-width:480px; animation:otp-truot .2s ease-out; }
+.otp-hop .otp-container { margin:0; border-radius:14px 14px 0 0; }
+.otp-dong { background:none; border:0; cursor:pointer; }
+.otp-thong-bao.otp-loi { color:#a1261c; font-weight:bold; }
+@keyframes otp-truot { from { transform:translateY(100%); } to { transform:translateY(0); } }
+
+/* ===== Căn cước điện tử kiểu VNeID (chỉ dùng class vn-*) ===== */
+.vn-man-hinh { position:relative; overflow:hidden; background:#fff; color:#222; border-radius:6px; padding-bottom:8px; }
+.vn-man-hinh > * { position:relative; }
+.vn-thanh-tieu-de { display:flex; align-items:center; gap:18px; padding:12px 4px 14px; font-size:19px; font-weight:600; }
+.vn-quay-lai { color:#222; text-decoration:none; font-size:26px; line-height:1; padding:0 4px; }
+/* thẻ: tỉ lệ như thẻ thật, mọi cỡ chữ theo chiều rộng thẻ (cqw) */
+.vn-the {
+    position:relative; width:100%; aspect-ratio:950/600; container-type:inline-size;
+    border-radius:2cqw; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,.2);
+    background:linear-gradient(115deg,#cfe8ec 0%,#eef1d2 40%,#f6efc3 62%,#d5e8ee 100%);
+    color:#111;
+}
+.vn-the::after {
+    content:""; position:absolute; right:6%; top:6%; height:90%; aspect-ratio:100/196;
+    background:url("/public/images/ban-do.svg") center/contain no-repeat;
+    pointer-events:none;
+}
+.vn-the > * { position:absolute; z-index:1; }
+.vn-quoc-huy { left:7%; top:6%; width:15%; height:auto; mix-blend-mode:multiply; }
+.vn-the-quoc-hieu { left:25%; top:8%; width:62%; text-align:center; color:#1f3a93; }
+.vn-the-quoc-hieu strong { display:block; font-size:2.9cqw; font-weight:700; letter-spacing:.1cqw; }
+.vn-the-quoc-hieu span { display:inline-block; font-size:2.3cqw; font-weight:700; margin-top:.4cqw; border-bottom:.25cqw solid #1f3a93; }
+.vn-the-ten { left:32.5%; top:26%; color:#c9333b; font-weight:700; font-size:4.3cqw; letter-spacing:.2cqw; }
+.vn-anh { left:3.4%; top:34%; width:24.5%; height:51.5%; object-fit:cover; background:#c9c9c9; }
+.vn-the-chu { left:30%; right:3%; top:42%; }
+.vn-the-chu small { display:block; font-size:2.2cqw; font-weight:700; color:#24315f; line-height:1.25; }
+.vn-the-chu small i { font-weight:500; }
+.vn-so { font-size:4.6cqw; font-weight:600; line-height:1.15; margin-bottom:.8cqw; }
+.vn-ho-ten { font-size:4.4cqw; font-weight:600; line-height:1.15; margin-bottom:.8cqw; white-space:nowrap; }
+.vn-the-hang { display:flex; justify-content:space-between; align-items:flex-start; }
+.vn-ngay-sinh { font-size:4.2cqw; font-weight:500; line-height:1.15; }
+.vn-gioi-tinh { margin-right:2%; }
+.vn-gioi-tinh small { display:inline; }
+.vn-gioi-tinh b { font-size:3.2cqw; font-weight:600; }
+.vn-quoc-tich { margin-top:.3cqw; }
+.vn-quoc-tich small { display:inline; }
+.vn-quoc-tich b { font-size:3.2cqw; font-weight:600; margin-left:.8cqw; }
+/* thông tin chi tiết */
+.vn-chi-tiet { padding:6px 2px 16px; border-top:1px solid #e4e4e4; margin-top:14px; }
+.vn-dong { padding:10px 0; font-size:15px; line-height:1.4; }
+.vn-dong b { font-weight:600; color:#1c2b4a; }
+.vn-dong-doi { display:flex; justify-content:space-between; gap:12px; }
+.vn-dong-doi span { flex:1; }
+.vn-dong-khoi b { display:block; margin-bottom:2px; }
+.vn-dong-khoi span { display:block; font-weight:500; }
+.vn-dong-ke { border-top:1px solid #e4e4e4; margin-top:6px; padding-top:14px; }
+.vn-ghi-chu { margin:14px 0 0; color:#888; font-size:12px; }
+
+/* Thông tin cấp độ tài khoản giống VNeID */
+.muc-tai-khoan {
+    background: #fff;
+    padding: 14px 16px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Dòng chữ đỏ */
+.muc-tai-khoan-tieu-de {
+    color: #d71920;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+/* Biểu tượng xác minh */
+.bieu-tuong-xac-minh {
+    font-size: 15px;
+}
+
+/* Dòng chữ đen */
+.muc-tai-khoan-mo-ta {
+    color: #333;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+}
