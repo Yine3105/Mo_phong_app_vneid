@@ -1,0 +1,23 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Quản lý tài khoản</title><link rel="stylesheet" href="/css/professional-form.css"><style>body{margin:0;background:#E9EAE8;font-family:'Times New Roman',Times,serif}.shell{max-width:1180px;margin:24px auto;background:#fff;border:1px solid #d5d7d5;border-top:5px solid #b91c1c;border-radius:14px;padding:24px}.head{display:flex;justify-content:space-between;align-items:center}.head h1{color:#a31515;margin:0}.head a,.btn{display:inline-block;text-decoration:none;background:#a31515;color:#fff;border-radius:7px;padding:9px 12px;font-weight:700;border:0;cursor:pointer}.filters{display:flex;gap:8px;margin:16px 0}.filters input,.filters select{padding:10px;border:1px solid #cfd2cf;border-radius:7px}.filters button{padding:10px 14px;background:#333;color:#fff;border:0;border-radius:7px}.table{width:100%;border-collapse:collapse}.table th{background:#a31515;color:#fff;padding:11px;text-align:left}.table td{padding:11px;border-bottom:1px solid #e4e5e4}.actions a,.actions button{margin-right:5px;color:#a31515;text-decoration:none;background:none;border:0;font-weight:700;cursor:pointer}@media(max-width:760px){.table{display:block;overflow:auto}.filters{flex-wrap:wrap}.head{align-items:flex-start;flex-direction:column;gap:10px}}</style></head><body><div class="shell"><div class="head"><h1>Quản lý tài khoản</h1><div><a href="/quan_tri/tong_quan">Dashboard</a> <a href="/quan_tri/them_tai_khoan">+ Thêm tài khoản</a></div></div>
+<form class="filters" method="GET"><input name="search" value="<?php echo e($_GET['search'] ?? ''); ?>" placeholder="Họ tên, email hoặc số định danh"><select name="vai_tro"><option value="">Tất cả vai trò</option><option value="1" <?php echo ($_GET['vai_tro']??'')==='1'?'selected':''; ?>>Công dân</option><option value="2" <?php echo ($_GET['vai_tro']??'')==='2'?'selected':''; ?>>Cán bộ</option><option value="3" <?php echo ($_GET['vai_tro']??'')==='3'?'selected':''; ?>>Quản trị viên</option></select><select name="trang_thai"><option value="">Tất cả trạng thái</option><option value="hoat_dong" <?php echo ($_GET['trang_thai']??'')==='hoat_dong'?'selected':''; ?>>Hoạt động</option><option value="bi_khoa" <?php echo ($_GET['trang_thai']??'')==='bi_khoa'?'selected':''; ?>>Bị khóa</option></select><button>Tìm kiếm</button></form>
+<?php if (isset($_GET['created'])): ?><p style="color:#18794e;font-weight:700">Đã thêm tài khoản thành công.</p><?php endif; ?>
+<?php if (isset($_GET['deleted'])): ?><p style="color:#18794e;font-weight:700">Đã xóa tài khoản thành công.</p><?php endif; ?>
+<?php if (isset($_GET['error'])): ?>
+<p style="color:#b91c1c;font-weight:700">
+<?php
+if ($_GET['error'] === 'last_admin') echo 'Không thể xóa tài khoản quản trị viên cuối cùng còn hoạt động.';
+elseif ($_GET['error'] === 'linked_data') echo 'Không thể xóa tài khoản vì đang được liên kết với dữ liệu hồ sơ hoặc yêu cầu.';
+else echo 'Không tìm thấy tài khoản cần xóa.';
+?>
+</p>
+<?php endif; ?>
+<table class="table"><thead><tr><th>Họ tên</th><th>Số định danh</th><th>Email</th><th>Vai trò</th><th>Trạng thái</th><th>Thao tác</th></tr></thead><tbody>
+<?php foreach ($danhSach as $row): ?><tr><td><?php echo e($row['ho_ten']); ?></td><td><?php echo e($row['so_dinh_danh']); ?></td><td><?php echo e($row['email'] ?? ''); ?></td><td><?php echo e($row['ten_vai_tro']); ?></td><td><?php echo $row['trang_thai']==='hoat_dong'?'Hoạt động':'Bị khóa'; ?></td><td class="actions">
+<a href="/quan_tri/chi_tiet_tai_khoan?id=<?php echo (int)$row['ma_nguoi_dung']; ?>">Chi tiết</a>
+<form style="display:inline" method="POST" action="/quan_tri/xoa_tai_khoan" onsubmit="return confirm('Xác nhận xóa tài khoản này?');">
+<input type="hidden" name="ma_csrf" value="<?php echo e(taoMaCsrf()); ?>">
+<input type="hidden" name="id" value="<?php echo (int)$row['ma_nguoi_dung']; ?>">
+<button>Xóa</button>
+</form>
+<?php if($row['trang_thai']==='hoat_dong'): ?><form style="display:inline" method="POST" action="/quan_tri/khoa_tai_khoan"><input type="hidden" name="ma_csrf" value="<?php echo e(taoMaCsrf()); ?>"><input type="hidden" name="id" value="<?php echo (int)$row['ma_nguoi_dung']; ?>"><button>Khóa</button></form><?php else: ?><form style="display:inline" method="POST" action="/quan_tri/mo_khoa_tai_khoan"><input type="hidden" name="ma_csrf" value="<?php echo e(taoMaCsrf()); ?>"><input type="hidden" name="id" value="<?php echo (int)$row['ma_nguoi_dung']; ?>"><button>Mở khóa</button></form><?php endif; ?></td></tr><?php endforeach; ?>
+</tbody></table></div></body></html>
