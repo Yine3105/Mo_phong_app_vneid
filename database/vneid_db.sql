@@ -36,9 +36,7 @@ CREATE TABLE ma_otp (
 CREATE TABLE nhat_ky_he_thong (
     ma_nhat_ky_he_thong INT PRIMARY KEY AUTO_INCREMENT,
     ma_nguoi_dung       INT,                              -- người thực hiện
-    hanh_dong           VARCHAR(50) NOT NULL,             -- thanh_cong, that_bai, dang_xuat, khoa_tai_khoan, duyet_ho_so...
-    doi_tuong           VARCHAR(50),                      -- nguoi_dung, ho_so_dich_vu...
-    ma_doi_tuong        INT,
+    hanh_dong           VARCHAR(50) NOT NULL, 
     noi_dung            VARCHAR(500),
     dia_chi_ip          VARCHAR(45),
     thoi_gian           DATETIME DEFAULT CURRENT_TIMESTAMP,
