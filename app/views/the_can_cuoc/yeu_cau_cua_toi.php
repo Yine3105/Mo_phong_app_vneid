@@ -1,6 +1,16 @@
 <?php
 $dsYeuCau = is_array($dsYeuCau ?? null) ? $dsYeuCau : [];
-$e = static function($value){ return htmlspecialchars((string)($value ?? ''),ENT_QUOTES,'UTF-8'); };
+$e = static function($value){
+    if (is_array($value)) {
+        $value = implode(', ', array_map(
+            static fn($v) => is_scalar($v) || $v === null
+                ? (string)$v
+                : json_encode($v, JSON_UNESCAPED_UNICODE),
+            $value
+        ));
+    }
+    return htmlspecialchars((string)($value ?? ''), ENT_QUOTES, 'UTF-8');
+};
 $tongYeuCau = count($dsYeuCau);
 $dangXuLy = 0;
 $daDuyet = 0;
