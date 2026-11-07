@@ -303,7 +303,7 @@
                 </label>
             </div>
 
-            <form action="/Mo_phong_app_vneid/dich_vu/nop_ho_so" method="POST" enctype="multipart/form-data">
+            <form action="/dich_vu/nop_ho_so" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="ma_csrf" value="<?= taoMaCsrf() ?>">
                 <input type="hidden" name="ma_dich_vu" value="1">
                 <input type="hidden" name="noi_dung" id="final_noi_dung_cu_tru">
